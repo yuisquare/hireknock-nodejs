@@ -12,6 +12,23 @@ export class OnboardService {
   async signup(signupdata: SignupDto) {
     let { fullname, email, password, mobile_no, linkedin_link } = signupdata
     try {
+      let emailExist = await this.onboardRepository.findOne({ email})
+      if(emailExist){
+        return{
+              status:204,
+              message:"Email already registered.",
+              resultSet:[]
+            }
+      }
+      let mobileNoExist = await this.onboardRepository.findOne({mobile_no})
+      if(mobileNoExist){
+        return{
+              status:204,
+              message:"Mobile number already registered.",
+              resultSet:[]
+            }
+      }
+      
       password = password && await bcrypt.hash(password, 10);
       let newUser = await this.onboardRepository.create({
         fullname,
