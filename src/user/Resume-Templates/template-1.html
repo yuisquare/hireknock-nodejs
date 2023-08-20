@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            size: 7in 9.25in;
+        }
+
+        .left-upper-section {
+            text-align: center;
+            height: 200px;
+        }
+
+        .right-upper-section {
+            height: 200px;
+        }
+
+        .left-section {
+            background-color: rgba(223, 204, 252, 0.377);
+            color: rgba(0, 0, 0, 0.655);
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        .profile-picture {
+            height: 170px;
+            width: 170px;
+            border-radius: 50%;
+        }
+
+        .declaration-name {
+            text-align: right;
+        }
+
+        .linkedin-icon {
+            font-weight: 800;
+            color: white;
+            border-radius: 70%;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0.655);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 0.5px;
+            font-size: smaller;
+        }
+
+        .flexrow {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            display: -webkit-flex;
+            -webkit-flex-direction: row;
+        }
+        .skills{
+            min-height: 170px;
+        }
+        .strengths{
+            min-height: 170px;
+        }
+        .languages{
+            min-height: 230px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="mt-5">
+            <div class="row pl-5 pr-5 mb-5 flexrow">
+                <div class="col-5 left-upper-section">
+                    <img class="rounded-circle img-fluid profile-picture" src="{{profile_picture_url}}" alt="Profile Photo" />
+                </div>
+                <div class="col-7 right-upper-section p-5">
+                    <h1>{{user_name}}</h1>
+                    <h5>{{job_title}}</h5>
+                </div>
+            </div>
+
+            <div class="row pl-5 flexrow">
+                <div class="col-5 left-section">
+                    <div class="contact-details">
+                        <div class="email flexrow mt-5">
+                            <i class="fas fa-envelope mt-3 mr-3"></i>
+                            <p class="mt-2">{{email_id}}</p>
+                        </div>
+
+                        <div class="mobile flexrow">
+                            <i class="fas fa-mobile-alt mt-3 mr-3"></i>
+                            <p class="mt-2">{{mobile_no}}</p>
+                        </div>
+
+                        <div class="linkedin flexrow">
+                            <i class="mt-2 mr-3">
+                                <div class="linkedin-icon">
+                                    <p>in</p>
+                                </div>
+                            </i>
+                            <p class="mt-2">{{linkedin_link}}</p>
+                        </div>
+
+                        <div class="address flexrow">
+                            <i class="fas fa-map-marker-alt mt-3 mr-3"></i>
+                            <p class="mt-2">{{address}}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="skills mt-4">
+                        <h6>SKILLS</h6>
+                        <hr>
+                        <ul>
+                            {{#each skills}}
+                            <li>{{this.skill}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+
+                    {{#if strengths}}
+                    <div class="strengths mt-4">
+                        <h6>STRENGTHS</h6>
+                        <hr>
+                        <ul>
+                            {{#each strengths}}
+                            <li>{{this.strength}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+
+                    <div class="languages mt-5">
+                        <h6>LANGUAGES</h6>
+                        <hr>
+                        <ul>
+                            {{#each languages}}
+                            <li>{{this.language}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-7 right-section">
+                    <div class="aboutme">
+                        <h6>PROFILE INFO</h6>
+                        <hr>
+                        <p>{{work_description}}</p>
+                    </div>
+                    <div class="work-experience mt-5">
+                        {{#if work_experiences}}
+                        <h6>WORK EXPERIENCE</h6>
+                        <hr>
+                        {{#each work_experiences}}
+                        <div class="mt-4">
+                            <div class="flexrow">
+                                <h6 class="font-weight-bold">{{this.title}}</h6>
+                                <small class="ml-auto mt-1">{{this.year}}</small>
+                            </div>
+                            <p>
+                                {{this.description}}
+                            </p>
+                        </div>
+                        {{/each}}
+                        {{else if project_details}}
+                        <h6>PROJECTS</h6>
+                        <hr>
+                        {{#each project_details}}
+                        <div class="mt-4">
+                            <div class="flexrow">
+                                <h6 class="font-weight-bold">{{this.title}}</h6>
+                                <small class="ml-auto mt-1">{{this.year}}</small>
+                            </div>
+                            <p>
+                                {{this.description}}
+                            </p>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                    </div>
+
+                    <div class="education mt-5">
+                        <h6>EDUCATION</h6>
+                        <hr>
+                        {{#each education_details}}
+                        <div class="mt-4">
+                            <div class="flexrow">
+                                <h6 class="font-weight-bold">{{this.title}}</h6>
+                                <small class="ml-auto mt-1">{{this.year}}</small>
+                            </div>
+                            <p>
+                                {{this.description}}
+                            </p>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="declaration mt-5">
+                        <h6>DECLARATION</h6>
+                        <hr>
+                        <P>I hearby declare that the above mentioned particulars are true to the best of my knowledge
+                            and belief.</P>
+                        <div class="declaration-name">
+                            <h6>{{user_name}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery links here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

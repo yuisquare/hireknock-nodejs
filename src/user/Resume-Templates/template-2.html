@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .left-section {
+            background-color: rgba(71, 44, 23, 0.833);
+            color: rgba(255, 255, 255, 0.832);
+            height: 100%;
+        }
+
+        .profile-picture {
+            height: 170px;
+            width: 170px;
+            border: 1px solid rgba(255, 255, 255, 0.832);
+            margin: 3px;
+        }
+
+        .declaration-name {
+            text-align: right;
+        }
+
+        .profilepic-div {
+            display: flex;
+            flex-direction: row;
+            display: -webkit-flex;
+            -webkit-flex-direction: row;
+            justify-content: center;
+        }
+
+        .profilepic-inner-div {
+            border: 3px solid rgba(255, 255, 255, 0.832);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .linkedin-icon {
+            font-weight: 800;
+            color: rgb(0, 0, 0);
+            border-radius: 70%;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.832);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 0.5px;
+            font-size: smaller;
+        }
+
+        .left-line {
+            background-color: rgba(255, 255, 255, 0.832);
+        }
+        .flexrow {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            display: -webkit-flex;
+            -webkit-flex-direction: row;
+        }
+        .skills{
+            min-height: 170px;
+        }
+        .languages{
+            min-height: 170px;
+        }
+        .education{
+            min-height: 240px;
+        }
+        .right-section{
+            height: 100%;
+        }
+        .aboutme{
+            min-height: 100px;
+        }
+        .work-experience{
+            min-height: 170px;
+        }
+        .declaration{
+            min-height: 170px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid p-5">
+        <div>
+
+            <div class="row flexrow">
+                <div class="col-5 left-section p-4">
+                    <div class="mb-4 profilepic-div">
+                        <div class="profilepic-inner-div">
+                            <img src="{{profile_picture_url}}" class="profile-picture" alt="">
+                        </div>
+                    </div>
+                    <div class="contact-details mt-5">
+                        <div class="email d-flex flexrow">
+                            <i class="fas fa-envelope m-1 mr-3"></i>
+                            <p>{{email_id}}</p>
+                        </div>
+
+                        <div class="mobile d-flex flexrow">
+                            <i class="fas fa-mobile-alt m-1 mr-3"></i>
+                            <p class="ml-1">{{mobile_no}}</p>
+                        </div>
+
+                        <div class="linkedin d-flex flexrow">
+                            <i class="mr-3">
+                                <div class="linkedin-icon">
+                                    <p>in</p>
+                                </div>
+                            </i>
+                            <p>{{linkedin_link}}</p>
+                        </div>
+
+                        <div class="address d-flex flexrow">
+                            <i class="fas fa-map-marker-alt  m-1 mr-3"></i>
+                            <p>{{address}}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="skills mt-4">
+                        <h6>SKILLS</h6>
+                        <hr class="left-line">
+                        <ul>
+                            {{#each skills}}
+                            <li>{{this.skill}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+
+                    <div class="languages mt-5">
+                        <h6>LANGUAGES</h6>
+                        <hr class="left-line">
+                        <ul>
+                            {{#each languages}}
+                            <li>{{this.language}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+
+                    <div class="education mt-5">
+                        <h6>EDUCATION</h6>
+                        <hr class="left-line">
+                        {{#each education_details}}
+                        <div>
+                            <h6 class="font-weight-bold">{{this.title}}</h6>
+                            <small class="ml-auto mt-1">{{this.year}}</small>
+                            <p>
+                                {{this.description}}
+                            </p>
+                        </div>
+                        {{/each}}
+                    </div>
+
+                </div>
+                <div class="col-7 right-section">
+                    <div class="mt-3 mb-3">
+                        <h1>{{user_name}}</h1>
+                        <h5>{{job_title}}</h5>
+                    </div>
+                    <div class="aboutme mt-5">
+                        <p>{{work_description}}</p>
+                    </div>
+                    <div class="work-experience mt-5">
+
+                        {{#if work_experiences}}
+                        <h6>WORK EXPERIENCE</h6>
+                        <hr>
+                        {{#each work_experiences}}
+                        <div class="mt-5">
+                            <div class="d-flex">
+                                <h6 class="font-weight-bold">{{this.title}}</h6>
+                                <small class="ml-auto mt-1">{{this.year}}</small>
+                            </div>
+                            <p>
+                                {{this.description}}
+                            </p>
+                        </div>
+                        {{/each}}
+                        {{else if project_details}}
+                        <h6>PROJECTS</h6>
+                        <hr>
+                        {{#each project_details}}
+                        <div class="mt-5">
+                            <div class="d-flex">
+                                <h6 class="font-weight-bold">{{this.title}}</h6>
+                                <small class="ml-auto mt-1">{{this.year}}</small>
+                            </div>
+                            <p>
+                                {{this.description}}
+                            </p>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                        
+                    </div>
+
+
+                    <div class="declaration mt-5">
+                        <h6>DECLARATION</h6>
+                        <hr>
+                        <P>I hearby declare that the above mentioned particulars are true to the best of my knowledge
+                            and belief.</P>
+                        <div class="declaration-name">
+                            <h6>{{user_name}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery links here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
