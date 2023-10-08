@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {OnboardModule} from './onboard/onboard.module'
 import { UserModule } from './user/user.module';
+import { JobsModule } from './jobs/jobs.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
@@ -19,7 +20,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       isGlobal: true,
       }),
     OnboardModule,
-    UserModule
+    UserModule,
+    JobsModule
   ],
   controllers: [AppController],
   providers: [AppService],
