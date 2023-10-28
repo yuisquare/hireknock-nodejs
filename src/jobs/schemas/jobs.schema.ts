@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {Document} from 'mongoose'
 
 export type JobsDocument = Jobs & Document ;
-@Schema()
+@Schema({ timestamps: { createdAt: "created_on", updatedAt: "updated_on" } })
 export class Jobs {
   @Prop()
   company_id: string;
@@ -25,11 +25,8 @@ export class Jobs {
   @Prop()
   location:string
 
-  @Prop()
-  created_on:Date
-
-  @Prop()
-  updated_on?:Date
+  @Prop({default: false})
+  is_deleted?:boolean
 }
 
 export const JobsSchema = SchemaFactory.createForClass(Jobs)

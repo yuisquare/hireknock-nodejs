@@ -6,22 +6,24 @@ import { UserModule } from './user/user.module';
 import { JobsModule } from './jobs/jobs.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(`mongodb+srv://anaskt:Kl53n3289@cluster0.lbdzo.mongodb.net/HireKnock?retryWrites=true`,
-      {
-        //useCreateIndex: true,
-        //useFindAndModify: false,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        uri: config.get<string>('MONGO_URL'),
+      })
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       }),
     OnboardModule,
     UserModule,
-    JobsModule
+    JobsModule,
+    CompanyModule
   ],
   controllers: [AppController],
   providers: [AppService],

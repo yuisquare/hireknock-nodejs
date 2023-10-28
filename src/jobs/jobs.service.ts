@@ -14,7 +14,6 @@ export class JobsService {
   async createJob(jobsDetails: createJobsDto) {
     try {
       let { job_title, description, job_type, no_of_positions, requirements, location, company_id } = jobsDetails
-      let created_on: any = moment().format("YYYY-MM-DD HH:mm")
       let createJobResponse = await this.jobsRepository.create({
         job_title,
         description,
@@ -22,8 +21,7 @@ export class JobsService {
         no_of_positions,
         requirements,
         location,
-        company_id,
-        created_on
+        company_id
       })
       return {
         status: 200,

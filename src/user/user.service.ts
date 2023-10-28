@@ -71,7 +71,11 @@ export class UserService {
 
         } catch (err) {
             console.log("error in buildResume function >>>", err);
-
+            return {
+                status: 500,
+                message: err ? (err.message || (err.response && err.response.message)) : "Something went wrong, server error.",
+                error: err
+              }
         }
     }
 

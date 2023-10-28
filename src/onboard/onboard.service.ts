@@ -46,6 +46,11 @@ export class OnboardService {
       }
     } catch (err) {
       console.log("error in signup function >>>", err);
+      return {
+        status: 500,
+        message: err ? (err.message || (err.response && err.response.message)) : "Something went wrong, server error.",
+        error: err
+      }
 
     }
   }
@@ -79,7 +84,11 @@ export class OnboardService {
       }
     } catch (err) {
       console.log('error in login function >>>', err);
-
+      return {
+        status: 500,
+        message: err ? (err.message || (err.response && err.response.message)) : "Something went wrong, server error.",
+        error: err
+      }
     }
 
   }
